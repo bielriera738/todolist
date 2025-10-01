@@ -44,6 +44,7 @@ function App() {
           />
           <button type="submit">Afegir</button>
           <button onClick={() => handleDeleteTask}>Tasca Important</button>
+          color: red;
         </form>
         <ul className="task-list">
           {tasks.map((task) => (
