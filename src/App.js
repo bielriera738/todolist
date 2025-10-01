@@ -43,8 +43,7 @@ function App() {
             placeholder="Afegeix una nova tasca..."
           />
           <button type="submit">Afegir</button>
-          <button onClick={() => handleDeleteTask}>Tasca Important</button>
-          color: red;
+          <button onClick={() => handleDeleteTask}>Tasca Important</button><color: red;>
         </form>
         <ul className="task-list">
           {tasks.map((task) => (
