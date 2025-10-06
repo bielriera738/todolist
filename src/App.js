@@ -46,6 +46,7 @@ function App() {
           <button onClick={() => handleDeleteTask}>Tasca Important</button>
         </form>
         <ul className="task-list">
+        <ul className="task-importante"></ul>
           {tasks.map((task) => (
             <li key={task.id} className={task.completed ? 'completed' : ''}>
               <span onClick={() => handleToggleComplete(task.id)}>
