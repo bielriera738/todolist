@@ -103,13 +103,18 @@ h1 {
 .task-list li button:hover {
   background-color: #c82333;
 }
-task-importante  {
+.task-importante {
+  background-color: white;
+  color: red;
+  border: 2px solid red;
+  border-radius: 8px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+
+.task-importante:hover {
   background-color: red;
   color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 8px 12px;
-  cursor: pointer;
-  margin-left: 10px;
-  transition: background-color 0.2s;
 }
