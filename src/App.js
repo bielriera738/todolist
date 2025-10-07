@@ -1,24 +1,40 @@
 import React, { useState } from 'react';
 import './App.css';
- 
+
 function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
- 
+
   const handleAddTask = (e) => {
     e.preventDefault();
     if (newTask.trim() === '') return;
-    
+
     const task = {
       id: Date.now(),
       text: newTask,
       completed: false,
+      important: false,
     };
-    
+
     setTasks([...tasks, task]);
     setNewTask('');
   };
- 
+
+  const handleAddImportantTask = (e) => {
+    e.preventDefault();
+    if (newTask.trim() === '') return;
+
+    const task = {
+      id: Date.now(),
+      text: newTask,
+      completed: false,
+      important: true, // 👈 tarea importante
+    };
+
+    setTasks([...tasks, task]);
+    setNewTask('');
+  };
+
   const handleToggleComplete = (taskId) => {
     setTasks(
       tasks.map((task) =>
@@ -26,29 +42,37 @@ function App() {
       )
     );
   };
- 
+
   const handleDeleteTask = (taskId) => {
     setTasks(tasks.filter((task) => task.id !== taskId));
   };
- 
+
   return (
     <div className="app-container">
       <div className="todo-container">
         <h1>La Meva Llista de Tasques</h1>
-        <form onSubmit={handleAddTask} className="task-form">
+
+        <form className="task-form">
           <input
             type="text"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
             placeholder="Afegeix una nova tasca..."
           />
-          <button type="submit">Afegir</button>
-          <button onClick={() => handleDeleteTask}>Tasca Important</button>
+          <button onClick={handleAddTask}>Afegir</button>
+          <button className="task-importante" onClick={handleAddImportantTask}>
+            Tasca Important
+          </button>
         </form>
+
         <ul className="task-list">
-        <ul className="task-importante"></ul>
           {tasks.map((task) => (
-            <li key={task.id} className={task.completed ? 'completed' : ''}>
+            <li
+              key={task.id}
+              className={`${task.completed ? 'completed' : ''} ${
+                task.important ? 'important' : ''
+              }`}
+            >
               <span onClick={() => handleToggleComplete(task.id)}>
                 {task.text}
               </span>
@@ -60,7 +84,5 @@ function App() {
     </div>
   );
 }
- 
-export default App;
- 
 
+export default App;

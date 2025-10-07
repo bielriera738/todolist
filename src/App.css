@@ -100,15 +100,19 @@ h1 {
   transition: background-color 0.2s;
 }
  
-.task-list li button:hover {
-  background-color: #c82333;
-}
-.task-list li.important span {
-  color: red;
-  font-weight: bold;
+.task-list li.important {
+  background-color: #ff4d4d; /* fondo rojo */
+  color: white; /* texto blanco */
+  border-radius: 8px;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
 }
 
-.task-list li.important {
-  border: 2px solid red;
-  border-radius: 8px;
+.task-list li.important:hover {
+  background-color: #e60000;
+}
+
+.task-list li.completed span {
+  text-decoration: line-through;
+  color: #ccc;
 }
