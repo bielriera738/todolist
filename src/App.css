@@ -115,4 +115,5 @@ h1 {
 .task-list li.completed span {
   text-decoration: line-through;
   color: #ccc;
+  background: none; /* remove red background when completed, optional */
 }

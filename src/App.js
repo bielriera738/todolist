@@ -15,7 +15,6 @@ function App() {
       completed: false,
       important: false,
     };
-
     setTasks([...tasks, task]);
     setNewTask('');
   };
@@ -28,9 +27,8 @@ function App() {
       id: Date.now(),
       text: newTask,
       completed: false,
-      important: true, // 👈 tarea importante
+      important: true,
     };
-
     setTasks([...tasks, task]);
     setNewTask('');
   };
@@ -67,13 +65,11 @@ function App() {
 
         <ul className="task-list">
           {tasks.map((task) => (
-            <li
-              key={task.id}
-              className={`${task.completed ? 'completed' : ''} ${
-                task.important ? 'important' : ''
-              }`}
-            >
-              <span onClick={() => handleToggleComplete(task.id)}>
+            <li key={task.id} className={task.completed ? 'completed' : ''}>
+              <span
+                className={task.important ? 'important-text' : ''}
+                onClick={() => handleToggleComplete(task.id)}
+              >
                 {task.text}
               </span>
               <button onClick={() => handleDeleteTask(task.id)}>Eliminar</button>
