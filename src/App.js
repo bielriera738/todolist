@@ -1,38 +1,18 @@
-import React, { useState } from 'react';
-import './App.css';
-
+// ... (imports anteriors)
+import TaskList from './components/TaskList'; // Importem el nou component
+ 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([
+    /* ... la llista inicial ... */
+  ]);
   const [newTask, setNewTask] = useState('');
-
-  const handleAddTask = (e) => {
-    e.preventDefault();
-    if (newTask.trim() === '') return;
-
-    const task = {
-      id: Date.now(),
-      text: newTask,
-      completed: false,
-      important: false,
-    };
-    setTasks([...tasks, task]);
-    setNewTask('');
-  };
-
-  const handleAddImportantTask = (e) => {
-    e.preventDefault();
-    if (newTask.trim() === '') return;
-
-    const task = {
-      id: Date.now(),
-      text: newTask,
-      completed: false,
-      important: true,
-    };
-    setTasks([...tasks, task]);
-    setNewTask('');
-  };
-
+ 
+  // Les funcions de manipulació (handleToggleComplete, handleDeleteTask)
+  // romanen a App.js ja que modifiquen l'estat 'tasks'.
+ 
+  // ... (handleAddTask)
+ 
+  // ... (handleToggleComplete)
   const handleToggleComplete = (taskId) => {
     setTasks(
       tasks.map((task) =>
@@ -40,45 +20,29 @@ function App() {
       )
     );
   };
-
+ 
+  // ... (handleDeleteTask)
   const handleDeleteTask = (taskId) => {
     setTasks(tasks.filter((task) => task.id !== taskId));
   };
-
+ 
+ 
   return (
     <div className="app-container">
       <div className="todo-container">
         <h1>La Meva Llista de Tasques</h1>
-
-        <form className="task-form">
-          <input
-            type="text"
-            value={newTask}
-            onChange={(e) => setNewTask(e.target.value)}
-            placeholder="Afegeix una nova tasca..."
-          />
-          <button onClick={handleAddTask}>Afegir</button>
-          <button className="task-importante" onClick={handleAddImportantTask}>
-            Tasca Important
-          </button>
-        </form>
-
-        <ul className="task-list">
-          {tasks.map((task) => (
-            <li key={task.id} className={task.completed ? 'completed' : ''}>
-              <span
-                className={task.important ? 'important-text' : ''}
-                onClick={() => handleToggleComplete(task.id)}
-              >
-                {task.text}
-              </span>
-              <button onClick={() => handleDeleteTask(task.id)}>Eliminar</button>
-            </li>
-          ))}
-        </ul>
+        {/* ... (El formulari queda de moment aquí) ... */}
+ 
+        {/* Ús del nou component TaskList, passant les props */}
+        <TaskList
+          tasks={tasks}
+          onToggleComplete={handleToggleComplete}
+          onDeleteTask={handleDeleteTask}
+        />
       </div>
     </div>
   );
 }
-
+ 
 export default App;
+ 
