@@ -1,6 +1,8 @@
 // ... (imports)
 import TaskForm from './components/TaskForm'; // Importem el nou component
- 
+import TaskList from './components/TaskList'; // Importem el nou component
+import React, { useState } from 'react';
+import './App.css';
 function App() {
   const [tasks, setTasks] = useState([
     { id: 1, text: 'Comprar pa', completed: false, dueDate: null }, // Afegim dueDate
@@ -46,3 +48,4 @@ function App() {
 }
 // ...
  
+export default App;
