@@ -1,92 +1,48 @@
-import React, { useState } from 'react';
-import './App.css';
-
+// ... (imports)
+import TaskForm from './components/TaskForm'; // Importem el nou component
+ 
 function App() {
-  const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState('');
-
-  // ➕ Añadir tarea normal
-  const handleAddTask = (e) => {
-    e.preventDefault();
-    if (newTask.trim() === '') return;
-
+  const [tasks, setTasks] = useState([
+    { id: 1, text: 'Comprar pa', completed: false, dueDate: null }, // Afegim dueDate
+    { id: 2, text: 'Acabar informe', completed: true, dueDate: new Date().toISOString() }, 
+  ]);
+  
+  // ... (handleAddTask s'ha d'actualitzar per incloure dueDate: null)
+  const handleAddTask = (text) => {
     const task = {
       id: Date.now(),
-      text: newTask,
+      text: text,
       completed: false,
-      important: false, // 👈 Por defecto no es importante
+      dueDate: null, // Nou camp
     };
-
     setTasks([...tasks, task]);
-    setNewTask('');
   };
-
-  // 🔴 Añadir tarea importante
-  const handleAddImportantTask = (e) => {
-    e.preventDefault();
-    if (newTask.trim() === '') return;
-
-    const task = {
-      id: Date.now(),
-      text: newTask,
-      completed: false,
-      important: true, // 👈 Aquí sí marcamos como importante
-    };
-
-    setTasks([...tasks, task]);
-    setNewTask('');
-  };
-
-  // ✅ Completar tarea
-  const handleToggleComplete = (taskId) => {
+  
+  // NOVA FUNCIÓ per actualitzar només la data
+  const handleUpdateTaskDate = (taskId, newDate) => {
     setTasks(
       tasks.map((task) =>
-        task.id === taskId ? { ...task, completed: !task.completed } : task
+        task.id === taskId ? { ...task, dueDate: newDate ? newDate.toISOString() : null } : task
       )
     );
   };
-
-  // 🗑️ Eliminar tarea
-  const handleDeleteTask = (taskId) => {
-    setTasks(tasks.filter((task) => task.id !== taskId));
-  };
-
+  
+  // ... (return)
   return (
     <div className="app-container">
       <div className="todo-container">
-        <h1>La Meva Llista de Tasques</h1>
-
-        <form className="task-form">
-          <input
-            type="text"
-            value={newTask}
-            onChange={(e) => setNewTask(e.target.value)}
-            placeholder="Afegeix una nova tasca..."
-          />
-          <button onClick={handleAddTask}>Afegir</button>
-          <button className="task-importante" onClick={handleAddImportantTask}>
-            Tasca Important
-          </button>
-        </form>
-
-        <ul className="task-list">
-          {tasks.map((task) => (
-            <li
-              key={task.id}
-              className={`${task.completed ? 'completed' : ''} ${
-                task.important ? 'important' : ''
-              }`}
-            >
-              <span onClick={() => handleToggleComplete(task.id)}>
-                {task.text}
-              </span>
-              <button onClick={() => handleDeleteTask(task.id)}>Eliminar</button>
-            </li>
-          ))}
-        </ul>
+        {/* ... */}
+        
+        {/* Caldrà passar handleUpdateTaskDate al TaskList i d'allà al TaskItem */}
+        <TaskList
+          tasks={tasks}
+          onToggleComplete={handleToggleComplete}
+          onDeleteTask={handleDeleteTask}
+          onUpdateTaskDate={handleUpdateTaskDate} // Nova prop
+        />
       </div>
     </div>
   );
 }
-
-export default App;
+// ...
+ 
